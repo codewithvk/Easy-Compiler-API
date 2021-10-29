@@ -11,6 +11,8 @@ app.get('/', (req, res) => {
     res.send("API IS RUNNING")
 })
 app.use('/api', require('./api/cppApi'));
+app.use('/api/python', require('./api/pythonApi'));
+
 
 app.listen(PORT, () => {
     console.log(`Listening at port ${PORT}`);
