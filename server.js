@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
 })
 app.use('/api', require('./api/cppApi'));
 app.use('/api/python', require('./api/pythonApi'));
-
+app.use('/api/java', require('./api/javaApi'))
 
 app.listen(PORT, () => {
     console.log(`Listening at port ${PORT}`);
