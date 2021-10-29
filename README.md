@@ -16,3 +16,9 @@
  - If you want fast performance or you do it at a low cost, then we recommended cloning this repo and run on your own cloud.
  - Don't forget to give 🌟 Star  🌟 to a repository.
 
+### Programming Language 
+- [x] CPP
+- [x] Python
+- [ ] Java
+- [ ] C
+- [ ] JavaScript
