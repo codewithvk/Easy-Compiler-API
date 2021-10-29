@@ -5,7 +5,8 @@ WORKDIR /usr/src/app
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && \
-    apt-get install gcc && \
+    apt-get -y install gcc mono-mcs && \
+    rm -rf /var/lib/apt/lists/* && \
     apt-get -y install python3
 
 COPY package*.json ./
