@@ -1,7 +1,7 @@
 # Easy-Compiler-API
 <p align="center">
   <img src="https://github.com/codewithvk/Easy-Compiler-API/blob/master/assets/Simple%20Compiler%20API.png" />
-  <p align="center">🚀  Open Source Compiler API which help you by compiler your code on production envierment. ✡️ </p>
+  <p align="center">🚀  Open Source Compiler API which help you by compile your code on production envierment. ✡️ </p>
 </p>
 
 
