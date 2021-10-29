@@ -30,7 +30,10 @@ async function deleteFiles(pyPath, inputPath, exePath) {
 }
 
 function getRunCommand(executable, input) {
-    return `python ${executable} < ${input}`;
+
+    return `python3 ${executable} < ${input}`;
+
+
 }
 
 function getExecutablePath(fileName) {
@@ -70,7 +73,8 @@ function runProgram(exePath, inputPath) {
 function runProgramNoIP(exePath) {
     return new Promise((resolve, reject) => {
 
-        exec(`python ${exePath}`, (error, stdout, stderr) => {
+        exec(`python3 ${exePath}`, (error, stdout, stderr) => {
+
             if (error) {
               reject({ error, stdout, stderr });
             } else {
