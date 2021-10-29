@@ -60,10 +60,8 @@ function compileProgram(javaPath) {
     return new Promise((resolve, reject) => {
         exec(`javac ${javaPath}`, (error, stdout, stderr) => {
             if (error) {
-                console.log({ error, stdout, stderr })
                 reject({ error, stdout, stderr });
             } else {
-                console.log({ error, stdout, stderr })
                 resolve({ stdout, stderr });
             }
         });
@@ -74,10 +72,8 @@ function runProgram(inputPath, CentralClass) {
     return new Promise((resolve, reject) => {
         exec(getRunCommand(inputPath, CentralClass), (error, stdout, stderr) => {
             if (error) {
-                console.log({ error, stdout, stderr })
                 reject({ error, stdout, stderr });
             } else {
-                console.log({ error, stdout, stderr })
                 resolve({ stdout, stderr });
             }
         });
@@ -86,7 +82,6 @@ function runProgram(inputPath, CentralClass) {
 
 
 const javaCompile = async (code, input, CentralClass) => {
-    console.log({ code, input })
     let state = {
         stdout: null,
         stderr: null,
@@ -102,7 +97,6 @@ const javaCompile = async (code, input, CentralClass) => {
 
     try {
         let { stdout, stderr } = await compileProgram(javaPath);
-        console.log({ stdout, stderr })
     } catch (err) {
         state.stderr = err.stderr;
         state.statusMes = "Compiler Error";
@@ -114,12 +108,10 @@ const javaCompile = async (code, input, CentralClass) => {
         let { stdout, stderr } = await runProgram(ipPath, CentralClass);
         state.stdout = stdout;
         state.stderr = stderr;
-        console.log({ stdout, stderr })
 
     } catch (err) {
         state.stderr = err.stderr;
         state.statusMes = "Run Time Error";
-        console.log({ state })
         deleteFiles(javaPath, ipPath);
     }
 
