@@ -19,9 +19,7 @@
 ### Programming Language 
 - [x] CPP
 - [x] Python
-- [ ] Java
-- [ ] C
-- [ ] JavaScript<br />
+- [x] Java<br />
 
 
  Fun Fact 😉 :- You can deploy it on free cloud provider(heroku) :)
