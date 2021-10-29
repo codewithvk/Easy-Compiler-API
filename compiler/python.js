@@ -15,9 +15,9 @@ const saveFile = (file, data) => {
     });
 };
 
-async function deleteFiles(cppPath, inputPath, exePath) {
-    if (fs.existsSync(cppPath)) {
-        await fs.unlinkSync(cppPath);
+async function deleteFiles(pyPath, inputPath, exePath) {
+    if (fs.existsSync(pyPath)) {
+        await fs.unlinkSync(pyPath);
     }
 
     if (fs.existsSync(inputPath)) {
@@ -43,7 +43,7 @@ function getExecutablePath(fileName) {
     }
 }
 
-function getCPPPath(fileName) {
+function getpyPath(fileName) {
     return `${path.join(__dirname, '..', 'upload', fileName)}.py`;
 }
 
@@ -51,32 +51,15 @@ function getInputPath(fileName) {
     return `${path.join(__dirname, '..', 'upload', fileName)}-input.txt`;
 }
 
-function compileProgram(cppPath, exePath, inputPath) {
-    return new Promise((resolve, reject) => {
-        exec(`python ${cppPath} `, (error, stdout, stderr) => {
-            if (error) {
-                console.log({ error, stdout, stderr })
 
-                reject({ error, stdout, stderr });
-            } else {
-                console.log({ stdout, stderr })
-                resolve({ stdout, stderr });
-            }
-        });
-    });
-}
 
 function runProgram(exePath, inputPath) {
     return new Promise((resolve, reject) => {
 
         exec(getRunCommand(exePath, inputPath), (error, stdout, stderr) => {
             if (error) {
-                console.log({ error, stdout, stderr })
-
                 reject({ error, stdout, stderr });
             } else {
-                console.log({ stdout, stderr })
-
                 resolve({ stdout, stderr });
             }
         });
@@ -89,12 +72,8 @@ function runProgramNoIP(exePath) {
 
         exec(`python ${exePath}`, (error, stdout, stderr) => {
             if (error) {
-                console.log({ error, stdout, stderr })
-
-                reject({ error, stdout, stderr });
+              reject({ error, stdout, stderr });
             } else {
-                console.log({ stdout, stderr })
-
                 resolve({ stdout, stderr });
             }
         });
@@ -109,54 +88,48 @@ const PythonCompile = async (code, input) => {
     if (input.length > 0) {
         let uniqueFileName = uuid();
         let executePath = getExecutablePath(uniqueFileName)
-        let cppPath = getCPPPath(uniqueFileName)
+        let pyPath = getpyPath(uniqueFileName)
         let ipPath = getInputPath(uniqueFileName)
 
-        await saveFile(cppPath, code);
+        await saveFile(pyPath, code);
         await saveFile(ipPath, input);
 
         try {
-            let { stdout, stderr } = await runProgram(cppPath, ipPath);
+            let { stdout, stderr } = await runProgram(pyPath, ipPath);
             state.stdout = stdout;
             state.stderr = stderr;
         } catch (err) {
             state.stderr = err.stderr;
             state.statusMes = "Compiler Error";
-            console.log({ err });
-            deleteFiles(cppPath, ipPath, executePath);
+            deleteFiles(pyPath, ipPath, executePath);
             return state;
         }
         if (state.stderr === '') {
             state.stderr = null;
         }
         state.statusMes = "Successfully Compiled";
-        await deleteFiles(cppPath, ipPath, executePath);
+        await deleteFiles(pyPath, ipPath, executePath);
         return state;
     } else {
         let uniqueFileName = uuid();
         let executePath = getExecutablePath(uniqueFileName)
-        let cppPath = getCPPPath(uniqueFileName)
-
-
-        await saveFile(cppPath, code);
-
-
+        let pyPath = getpyPath(uniqueFileName)
+        await saveFile(pyPath, code);
         try {
-            let { stdout, stderr } = await runProgramNoIP(cppPath);
+            let { stdout, stderr } = await runProgramNoIP(pyPath);
             state.stdout = stdout;
             state.stderr = stderr;
         } catch (err) {
             state.stderr = err.stderr;
             state.statusMes = "Compiler Error";
-            console.log({ err });
-            deleteFiles(cppPath, executePath);
+            deleteFiles(pyPath, executePath);
             return state;
         }
         if (state.stderr === '') {
             state.stderr = null;
         }
         state.statusMes = "Successfully Compiled";
-        await deleteFiles(cppPath, executePath);
+        await deleteFiles(pyPath, executePath);
         return state;
 
     }
