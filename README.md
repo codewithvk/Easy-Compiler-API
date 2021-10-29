@@ -21,4 +21,7 @@
 - [x] Python
 - [ ] Java
 - [ ] C
-- [ ] JavaScript
+- [ ] JavaScript<br />
+
+
+ Fun Fact 😉 :- You can deploy it on free cloud provider(heroku) :)
