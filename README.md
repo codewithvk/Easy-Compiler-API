@@ -8,7 +8,7 @@
 ## Important
 
 <p align="center">
-  <img src="https://github.com/codewithvk/Easy-Compiler-API/blob/master/assets/temp.png" />
+  <img src="https://github.com/codewithvk/Easy-Compiler-API/blob/master/assets/Rapid.png" />
 </p>
 
   
