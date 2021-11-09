@@ -1,6 +1,6 @@
 # Easy-Compiler-API
 <p align="center">
-  <img src="https://github.com/codewithvk/Easy-Compiler-API/blob/master/assets/Simple%20Compiler%20API.png" />
+  <img src="assets/Simple Compiler API.png" />
   <p align="center">🚀  Open Source Compiler API which help you by compile your code on production envierment. ✡️ </p>
 </p>
 
@@ -8,7 +8,7 @@
 ## Important
 
 <p align="center">
-  <img src="https://github.com/codewithvk/Easy-Compiler-API/blob/master/assets/Rapid.png" />
+  <img src="assets/rapid1.png" />
 </p>
 
   
