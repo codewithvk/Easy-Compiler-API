@@ -77,20 +77,25 @@ function runProgram(exePath, inputPath) {
 
 
 const CppCompile = async (code, input) => {
+    // State for response and error
     let state = {
         stdout: null,
         stderr: null,
         statusMes : "",
     }
+
+    // Path to compiler and input file code.
     let uniqueFileName = uuid();
     let executePath = getExecutablePath(uniqueFileName)
     let cppPath = getCPPPath(uniqueFileName)
     let ipPath = getInputPath(uniqueFileName)
 
+    // Save the path of input and code file.
     await saveFile(cppPath, code);
     await saveFile(ipPath, input);
 
     try {
+        // Compile the code.
         await compileProgram(cppPath, executePath);
     } catch (err) {
         state.stderr = err.stderr;
@@ -100,6 +105,7 @@ const CppCompile = async (code, input) => {
     }
 
     try {
+        // run the code.
         let { stdout, stderr } = await runProgram(executePath, ipPath);
         state.stdout = stdout;
         state.stderr = stderr;
@@ -113,6 +119,7 @@ const CppCompile = async (code, input) => {
         state.stderr = null;
     }
     state.statusMes = "Successfully Compiled";
+    // After compile delete exiting file for server.
     await deleteFiles(cppPath, ipPath, executePath);
     return state;
 

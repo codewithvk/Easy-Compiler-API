@@ -1,8 +1,17 @@
 const express = require('express');
 const { PythonCompile } = require('../compiler/python');
 const router = express.Router();
+/*
 
+ @Route: /api/python
+ @Method: POST
+ @Body: {
+     code: string,
+     input: string,
+ }
+ Alert : Make sure code and input are hex format.
 
+ */
 router.post('/', async (req, res) => {
     const InputCode = Buffer.from(req.body.code, 'base64').toString('binary')
     const DeCode = Buffer.from(req.body.input, 'base64').toString('binary')
